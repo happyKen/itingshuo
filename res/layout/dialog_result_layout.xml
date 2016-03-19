@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20.0dip" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical" >
+        	<RelativeLayout   	     
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    >
+		<ImageView 
+	    android:id="@+id/img_close"
+	    android:layout_width="40dp"
+	     android:layout_height="40dp"
+	     android:background="@drawable/dialog_close"
+	     android:layout_alignParentRight="true"/>
+        <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="你的评价>>"
+	        android:textColor="@color/no_selected"
+	        android:textSize="24sp"
+	        android:layout_margin="30dp"	        
+	        />
+        </RelativeLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_gravity="center_horizontal"
+		    >
+			  <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     	android:gravity="center_horizontal"
+     	android:layout_centerInParent="true"
+       >     
+	<TableRow>
+        <TextView    
+            android:id="@+id/voice1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:text="@string/yinzhun"
+/>
+
+        <TextView
+            android:id="@+id/voice2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+             />
+
+        <TextView
+            android:id="@+id/emotion1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qinggan"
+/>
+
+        <TextView
+            android:id="@+id/emotion2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+/>
+	</TableRow>
+	<TableRow >
+        <TextView
+            android:id="@+id/energy1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zhongyin"
+/>
+
+        <TextView
+            android:id="@+id/energy2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+ />
+
+        <TextView
+            android:id="@+id/speed1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yusu"
+ />
+
+        <TextView
+            android:id="@+id/speed2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+ />
+	</TableRow>
+	<TableRow >
+        <TextView
+            android:id="@+id/rhythm1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jiezhou"
+ />
+
+        <TextView
+            android:id="@+id/rhythm2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+     
+ />
+
+        <TextView
+            android:id="@+id/intonation1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yudiao"
+  />
+
+        <TextView
+            android:id="@+id/intonation2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="A"
+ />
+        </TableRow>
+        </TableLayout>
+		</LinearLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_marginLeft="30dp"
+		    android:layout_marginTop="20dp"
+		    android:layout_marginBottom="30dp"
+		    android:layout_marginRight="30dp"
+		    >
+		    <LinearLayout 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		     <TextView
+            android:id="@+id/final1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zongping"
+  />
+		       <TextView
+            android:id="@+id/final2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"
+  />
+		</LinearLayout>
+				    <LinearLayout 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		     <TextView
+            android:id="@+id/feedback1"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zhidian"
+  />
+		       <TextView
+            android:id="@+id/feedback2"
+            style="@style/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价这是评价"
+            
+  />
+		</LinearLayout>
+		</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal" 
+    style="@style/list_item"
+    >
+   <LinearLayout 
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:paddingTop="8dp" 
+       android:paddingBottom="8dp"
+       android:layout_weight="2"
+       android:gravity="center">
+       <ImageView 
+           android:id="@+id/img_movie"
+           android:layout_width="80dp"
+           android:layout_height="80dp"
+           android:layout_gravity="center"/>
+   </LinearLayout>
+   <RelativeLayout 
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_weight="4.5"
+       android:paddingTop="8dp" 
+       android:paddingBottom="8dp"
+       >
+       <TextView 
+           android:id="@+id/tv_title"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="标题"
+           android:textSize="18sp"
+          android:layout_alignParentTop="true"/>
+        <TextView 
+              android:id="@+id/tv_content"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"   
+             android:textSize="13sp" 
+             android:layout_centerVertical="true"
+             android:maxLines="1"
+             android:text="内容"
+           />
+        <ImageView 
+           android:id="@+id/img_movie_beginStudy"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:background="@drawable/beginstudy"
+            android:layout_alignParentBottom="true"/>
+   </RelativeLayout>
+    <LinearLayout 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_weight="1"
+       android:paddingTop="8dp" 
+       android:paddingBottom="8dp"
+       android:gravity="right">
+       <TextView 
+             android:id="@+id/tv_time"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIME"
+            android:textSize="13sp"
+            android:paddingRight="5dp"
+           />
+   </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>

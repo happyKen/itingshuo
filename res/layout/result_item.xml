@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+    android:layout_height="100dp">
+ <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    style="@style/list_item" >   
+ <RelativeLayout
+        android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingTop="8dp" 
+       android:paddingBottom="8dp"
+       android:paddingLeft="50dp">
+        <TextView 
+           android:layout_marginTop="10dp"
+           android:id="@+id/tv_result_grade"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="99分"
+           android:textColor="#575757"
+           android:textSize="18sp"
+         />
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tv_result_grade"
+            android:orientation="horizontal">
+        <TextView 
+             android:id="@+id/tv_result_pingyu1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"   
+             android:textSize="18sp"       
+             android:text="评语 : "
+            android:textColor="#575757"
+           />
+        	 <TextView 
+             android:id="@+id/tv_result_pingyu2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"   
+             android:textSize="18sp"          
+             android:maxLines="1"
+             android:layout_marginLeft="3dp"
+             android:text="这是评语这是评语这是评语这是评语"
+            android:textColor="#575757"
+           />
+        
+        </LinearLayout>
+       </RelativeLayout>
+         <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        android:layout_weight="3" 
+          android:paddingTop="8dp" 
+       android:paddingBottom="8dp"
+       android:paddingRight="8dp">
+         <TextView 
+             android:id="@+id/tv_result_date"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2015-12-25"
+            android:textSize="13sp"
+            android:paddingRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:textColor="#6f6f6f"
+           />
+        </RelativeLayout>
+
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.itingshuo.LoginActivity"
+    android:background="@drawable/bg" >
+
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:hint="账号"
+        android:drawablePadding="15.0dip"
+        android:paddingBottom="3dip"
+        android:ems="10" 
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@drawable/username_icon"
+        android:inputType="text"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:background="@drawable/input_bg"
+        >
+    </EditText>
+	<EditText
+        android:id="@+id/edt_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/edt_username"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="15.0dip"
+        android:paddingBottom="3dip"
+        android:hint="密码"
+        android:ems="10" 
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/password_icon"
+        android:textColorHint="#FFFFFF"
+         android:background="@drawable/input_bg"
+        >
+    </EditText>
+	<TextView
+	    android:id="@+id/tv_error"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignRight="@id/edt_password"
+	    android:layout_below="@id/edt_password"
+	    android:text="密码错误" 
+	    android:textColor="#cc0000"
+	    android:visibility="gone"/>
+	<Button
+	    android:id="@+id/btn_login"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	     android:layout_below="@id/edt_password"
+	     android:layout_marginTop="130dp"
+	    android:background="@drawable/selector_login" />
+
+	
+
+</RelativeLayout>

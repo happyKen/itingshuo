@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+ 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+      >
+<LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" 
+     android:orientation="vertical"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" 
+            android:layout_marginBottom="13dp">
+        <LinearLayout 
+              android:id="@+id/taici_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:gravity="center"
+               android:layout_marginTop="8dp"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="4dp"
+              android:layout_marginBottom="8dp"
+              android:background="@drawable/select_white_bg"
+              >
+            <TextView 
+                android:id="@+id/taici_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="台词"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/no_selected"
+                android:layout_height="match_parent"/>
+           </LinearLayout> 
+                  <LinearLayout 
+             android:id="@+id/xuanju_bg"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:background="@drawable/select_white_bg"
+               android:layout_marginTop="8dp"
+              android:layout_marginLeft="4dp"
+              android:layout_marginRight="8dp"
+              android:layout_marginBottom="8dp"
+              android:gravity="center">
+            <TextView 
+                android:id="@+id/xuanju_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="选句"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/no_selected"
+                android:layout_height="match_parent"/>
+             </LinearLayout> 
+              
+        </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

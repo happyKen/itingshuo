@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    tools:ignore="MissingTranslation"  >
+
+    <string name="app_name" translatable="false">爱听说 </string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_movie" translatable="false">MovieActivity</string>
+    <string name="title_activity_choose" translatable="false">ChooseActivity</string>
+    <string name="pull_to_refresh" translatable="false">下拉可以刷新</string>
+    <string name="release_to_refresh" translatable="false">释放立即刷新</string>
+    <string name="refreshing" translatable="false">正在刷新…</string>
+    <string name="not_updated_yet" translatable="false">暂未更新过</string>
+    <string name="updated_at" translatable="false">上次更新于%1$s前</string>
+    <string name="updated_just_now" translatable="false">刚刚更新</string>
+    <string name="time_error" translatable="false">时间有问题</string>
+    <string name="title_activity_taici" translatable="false">TaiciActivity</string>
+    <string name="yinzhun" translatable="false">音准：</string>
+    <string name="qinggan" translatable="false">情感：</string>
+    <string name="zhongyin" translatable="false">重音：</string>
+    <string name="yusu" translatable="false">语速：</string>
+    <string name="jiezhou" translatable="false">节奏：</string>
+    <string name="yudiao" translatable="false">语调：</string>
+    <string name="zongping" translatable="false">总评:</string>
+    <string name="zhidian" translatable="false">评价:</string>
+    <string name="title_activity_tone" translatable="false">ToneActivity</string>
+    <string name="title_activity_speak" translatable="false">SpeakActivity</string>
+    <string name="title_activity_movie_list" translatable="false">MovieListActivity</string>
+    <string name="title_activity_speak_list" translatable="false">SpeakListActivity</string>
+    <string name="title_activity_result" translatable="false">ResultActivity</string>
+
+</resources>

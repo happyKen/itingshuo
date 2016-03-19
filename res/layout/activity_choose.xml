@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+<include layout="@layout/bar" />
+<include layout="@layout/bannner" />
+<LinearLayout 
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:orientation="vertical" >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:background="@drawable/g_white"
+    android:layout_weight="1"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    >
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    >
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/cirmovie"
+            android:layout_centerInParent="true"
+            
+             />
+    </RelativeLayout> 
+           <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true" >
+
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+            android:paddingBottom="20dp"
+            android:layout_above="@+id/img_movie_start"
+            android:text="影视配音"
+            android:textColor="#40afc4"/>
+         <ImageView
+            android:id="@+id/img_movie_start"
+            android:layout_width="68dp"
+            android:layout_height="22dp"
+            android:background="@drawable/beginstudy"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+             />
+         </RelativeLayout>
+        </RelativeLayout>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+     android:background="@drawable/g_white"
+     android:layout_weight="1"
+      android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp">
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:layout_gravity="center"
+     android:layout_weight="1">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/speaking"
+            android:layout_centerInParent="true"
+             />
+    </RelativeLayout> 
+           <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:layout_weight="1">
+          <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true" >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+            android:paddingBottom="20dp"
+            android:layout_above="@+id/img_speak_start"
+            android:text="语音语调练习"
+            android:textColor="#40afc4"/>
+         <ImageView
+            android:id="@+id/img_speak_start"
+            android:layout_width="68dp"
+            android:layout_height="22dp"
+            android:background="@drawable/beginstudy"
+                android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+             />
+         </RelativeLayout>
+        </RelativeLayout>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+     android:background="@drawable/g_white" 
+     android:layout_weight="1"
+         android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp"
+         android:layout_marginBottom="5dp">
+ <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:layout_gravity="center"
+     android:layout_weight="1">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/tone"
+            android:layout_centerInParent="true"
+             />
+    </RelativeLayout> 
+           <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:layout_weight="1">
+         <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true" >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+            android:paddingBottom="20dp"
+            android:layout_above="@+id/img_tone_start"
+            android:text="演讲与散文"
+            android:textColor="#40afc4"/>
+         <ImageView
+            android:id="@+id/img_tone_start"
+            android:layout_width="68dp"
+            android:layout_height="22dp"
+            android:background="@drawable/beginstudy"
+                   android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+             />
+           </RelativeLayout>
+        </RelativeLayout>
+</LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
