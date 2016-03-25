@@ -5,7 +5,9 @@
 客户端的功能主要有三种，电影配音，语音语调练习，文章朗诵练习。
 视频框架采用vitamio  
 [了解更多vitamio](http://blog.csdn.net/flamejack/article/details/50936632)  
-使用Gson+volley+okHTTP网络通信架构，更好地应付多用户，多线程的访问流量。  
+使用Gson+volley+okHTTP网络通信架构，更好地应付多用户，多线程的访问流量。 
+
+###下面是部分截图
 ![选择篇章](./选择篇章.png)  
 ![电影播放截图](./image.png)  
 ![反馈结果](./result.png)  
