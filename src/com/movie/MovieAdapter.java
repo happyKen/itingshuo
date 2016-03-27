@@ -2,8 +2,12 @@ package com.movie;
 
 import java.util.List;
 
+import volley.VolleyManager;
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +65,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 			view = convertView;
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		viewHolder.movieImage.setImageResource(movie.getImgSrc());
+		 VolleyManager.newInstance().ImageLoaderRequest(viewHolder.movieImage, movie.getImgSrc(),
+	                R.drawable.ic_default, R.drawable.ic_error, 80, 80);
 		viewHolder.movieTitle.setText(movie.getTitle());
 		viewHolder.movieContent.setText(movie.getContent());
 		viewHolder.movieTime.setText(movie.getTime());
@@ -73,7 +78,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						//Toast.makeText(getContext(), movie.getTitle()+"begin study", Toast.LENGTH_SHORT).show();
-						mySendIntent();
+						mySendIntent(movie.getMovieid(),movie.getEmotionid());
 					}
 				});
 		return view;
@@ -86,14 +91,16 @@ class ViewHolder{
 	TextView movieTime;
 	ImageView movieBeginStudy;
 }
-public void mySendIntent(){
+public void mySendIntent(String movieid,String emotionid){
 	Intent intent = new Intent(getContext(), MovieActivity.class);
 //    //new一个Bundle对象，并将要传递的数据传入
-//    Bundle bundle = new Bundle();
-//    bundle.putInt("username", username);
-//    bundle.putString("password", password);
-//    //将bundle对象assign给Intent
-//    intent.putExtras(bundle);
+  Bundle bundle = new Bundle();
+    bundle.putString("movieid", movieid);
+    bundle.putString("emotionid", emotionid);
+    Log.d("sendbundle","emotionid: "+emotionid);
+	Log.d("sendbundle","movieid: "+movieid);
+    //将bundle对象assign给Intent
+    intent.putExtras(bundle);
 //    //开启跳转
     getContext().startActivity(intent);
 }

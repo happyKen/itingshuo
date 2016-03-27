@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fragment.MovieEmotionFragment;
-import com.example.fragment.MovieListFragment;
 import com.example.fragment.SpeakClassFragment;
 import com.example.fragment.ToneListFragment;
 import com.nineoldandroids.view.ViewPropertyAnimator;

@@ -17,10 +17,20 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import volley.VolleyManager;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.config.Urls;
 import com.dialog.ChangeDialog;
 import com.dialog.ResultDialog;
 import com.dialog.UpdateDialog;
-import com.example.fragment.MovieListFragment;
+import com.entity.JShowMovie;
+import com.example.fragment.MovieSegmentFragment;
 import com.example.fragment.MovieTaiciFragment;
 import com.example.fragment.MovieXuanJuFragment;
 import com.movie.Utils;
@@ -113,7 +123,14 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 	private TextView luYin_text;
 	private TextView shangChuan_text;
 	 private UIHandler uiHandler;
-	
+	//获取到的intent字段
+     private String emotionid;
+     private String movieid;
+     private Boolean sign=true;
+     //两个fragment需要获取的信息
+     String taici ="台词";
+     private List<JShowMovie.DataEntity.MovieEntity> movieEntity;
+     public static final String TAG = "MovieActivity";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -163,7 +180,16 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		uiHandler = new UIHandler();   
 		changeState(0);	// 初始化动画
 		fragmentInit();
-		new PlayAsyncTask().execute("");
+		new Thread(){
+			public void run() {
+				movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();    
+				mGetIntent();
+				requestDataFromServer();
+				while(sign);
+				new PlayAsyncTask().execute("");
+			};
+		
+		}.start();
 	}
 
 	private RelativeLayout mRl_PlayView;
@@ -612,7 +638,7 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 	public void fragmentInit(){
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new MovieTaiciFragment());//台词
-		fragments.add(new MovieListFragment());//选句	
+		fragments.add(new MovieSegmentFragment());//选句	
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		viewPager.setOffscreenPageLimit(3);
 		viewPager.setAnimationCacheEnabled(true);
@@ -862,5 +888,72 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 	    	 }, 3000);
 	    	
 	    }
+	    
+	    //获取intent传来的值
+	    public void mGetIntent(){
+	 	    	Bundle bundle1 = getIntent().getExtras();
+	 	    	emotionid = bundle1.getString("emotionid");
+	 			movieid = bundle1.getString("movieid");
+	 			Log.d("bundle","emotionid: "+emotionid);
+	 			Log.d("bundle","movieid: "+movieid);
+	 	    	if(bundle1.containsKey("taici")){
+	 	    		setTaici(bundle1.getString("taici"));
+	 	    	}
+	 	    	if(bundle1.containsKey("movieSrc")){
+	 	    		mPath = bundle1.getString("movieSrc");
+	 	    	}    		
+	 			
+	    }
+	    /*
+		 * 模拟向服务器请求数据
+		 */
+		private void requestDataFromServer(){
+						Map<String,String> map = new HashMap<String,String>();
+				        map.put("emotionid", emotionid);
+				        map.put("movieid", movieid);		        
+				       VolleyManager.newInstance().GsonPostRequest(TAG, map, Urls.SHOWMOVIE_URL, JShowMovie.class, new Response.Listener<JShowMovie>() {
+				           @Override
+				           public void onResponse(JShowMovie jmovie) {
+				          //    Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getMovie_name());
+				        	//   Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getCover_addr());   
+				        	   int length = 0;
+				        	   if(jmovie.getData().getStatus()!=0 && jmovie.getData().getMovie()!=null){
+				        		  if(taici.equals("台词"))
+				        			  setTaici(jmovie.getData().getMovie().get(0).getContent());
+				        			  if(mPath.equals("http://ocs.maiziedu.com/android_app_sde_1.mp4"))
+				        				  mPath = jmovie.getData().getMovie().get(0).getSegment_addr();
+
+				        		  setmovieEntity(jmovie.getData().getMovie());
+				        		  sign=false;
+				        	   Log.d("success", "ok" +  jmovie.getData().getMovie().get(0).getSegment_name());
+				        	   }
+				           }
+				       }, new Response.ErrorListener() {
+				           @Override
+				           public void onErrorResponse(VolleyError error) {
+				               Log.d("fail", "connect fail");
+
+				           }
+				       });
+				        Log.d(TAG, "finish");
+		}
+		
+		//fragment获取activity信息
+		public void setTaici(String taici){
+			this.taici = taici;
+		}
+		public void setmovieEntity(List<JShowMovie.DataEntity.MovieEntity> movieEntity){
+			this.movieEntity = movieEntity;
+		}
+		public String getTaici(){
+			return taici;
+		}
+		public List<JShowMovie.DataEntity.MovieEntity> getmovieEntity(){
+			return movieEntity;
+		}
+
+		
+		
+	    
 	    
 }

@@ -1,4 +1,5 @@
 package com.example.itingshuo;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import com.config.Urls;
@@ -167,6 +168,7 @@ public class LoginActivity extends Activity {
 	 * 与服务器连接
 	 */
 	private Boolean login(String username,String password){
+		if(username!=null&&password!=null){
 		 Map<String,String> map = new HashMap<String,String>();
 	        map.put("username", username);
 	        map.put("password",password);
@@ -184,7 +186,10 @@ public class LoginActivity extends Activity {
 	           }
 	       });
 	        Log.d(TAG, "222222");
+		}
 	        return true;
+		
+		
 	}
 	private void init(){
 		uiHandler = new UIHandler();

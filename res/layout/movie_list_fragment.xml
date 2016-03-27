@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    android:name="com.allen.teachingaid.fragment.ItemFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swiperefreshlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
- <com.refresh.RefreshableView
-        android:id="@+id/refreshable_view"  
-        android:layout_width="fill_parent"  
-        android:layout_height="fill_parent" >  
+    >
     <ListView 
     android:id="@+id/lv_movie"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:divider="@null"></ListView>
-    </com.refresh.RefreshableView>
-
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

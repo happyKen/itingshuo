@@ -5,4 +5,7 @@
 	 <color name="finish_No">#929292</color>
 	 <color name="no_selected">#40afc4</color>
 	 <color name="selected">#f7fbfc</color>
+	  <color name="colorPrimary">#d74f19</color>
+    <color name="colorPrimaryDark">#b14604</color>
+    <color name="colorAccent">#e3e64f</color>
 </resources>

@@ -5,15 +5,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.itingshuo.MovieActivity;
 import com.example.itingshuo.R;
 
 
 public class MovieTaiciFragment extends Fragment {
+	private TextView taiciTextView;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		
-		return View.inflate(getActivity(), R.layout.movie_taici_fragment, null);
+		View view =View.inflate(getActivity(), R.layout.movie_taici_fragment, null);
+		taiciTextView=(TextView) view.findViewById(R.id.taici);
+		taiciTextView.setText(((MovieActivity)getActivity()).getTaici());
+		return view;
 	}
 }

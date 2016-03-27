@@ -45,32 +45,30 @@ public class MovieEmotionFragment extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.happiness:
-//			Toast.makeText(getActivity(), "ssss1", Toast.LENGTH_LONG).show();
-//			 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-//			 Toast.makeText(getActivity(), "ssss2", Toast.LENGTH_LONG).show();
-//			 transaction.addToBackStack(null);
-//			 Toast.makeText(getActivity(), "ssss3", Toast.LENGTH_LONG).show();
-//	         
-//			 transaction.replace(R.id.movie_emotion, new MovieListFragment()).commit();
-//			 Toast.makeText(getActivity(), "ssss4", Toast.LENGTH_LONG).show();
-		//	onHappinessClick.onClick(happiness);
-			mySendIntent();
+			 mySendIntent("1");
 			 break;
-
+		case R.id.sadness:
+			 mySendIntent("2");
+			 break;
+		case R.id.anger:
+			 mySendIntent("3");
+			 break;
+		case R.id.surprise:
+			 mySendIntent("4");
+			 break;
 		default:
 			break;
 		}
 		
 	}
-	public void mySendIntent(){
+	public void mySendIntent(String emotion){
 		Intent intent = new Intent(getActivity(), MovieListActivity.class);
-//        //new一个Bundle对象，并将要传递的数据传入
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("username", username);
-//        bundle.putString("password", password);
-//        //将bundle对象assign给Intent
-//        intent.putExtras(bundle);
-//        //开启跳转
+        //new一个Bundle对象，并将要传递的数据传入
+        Bundle bundle = new Bundle();
+        bundle.putString("emotion", emotion);
+        //将bundle对象assign给Intent
+        intent.putExtras(bundle);
+        //开启跳转
         startActivity(intent);
 	}
 
