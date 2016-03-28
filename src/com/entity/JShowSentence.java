@@ -9,9 +9,10 @@ import java.util.List;
  */
 public class JShowSentence {
 
+
     /**
      * status : 1
-     * sentence : [{"sentence_id":"1","course_id":"1","content":"It will be in the place where we always put it.","sen_addr":"Public/Home/tone/record/01.wav","sen_time":"1:23","create_time":"1456453494"},{"sentence_id":"2","course_id":"1","content":"It will be in the place where we always put it.","sen_addr":"Public/Home/tone/record/03.wav","sen_time":"2:13","create_time":"1456453494"},{"sentence_id":"3","course_id":"1","content":"The clothes are lying on the fridge","sen_addr":"Public/Home/tone/record/05.wav","sen_time":"2:31","create_time":"1456453494"},{"sentence_id":"4","course_id":"1","content":"The clothes are lying on the fridge","sen_addr":"Public/Home/tone/record/06.wav","sen_time":"3:12","create_time":"1456453494"}]
+     * sentence : [{"sentence_id":"1","course_id":"1","content":"It will be in the place where we always put it.","sen_addr":"Public/Home/tone/record/01.wav","sen_time":"1:23","create_time":"1456453494"}]
      */
 
     private DataEntity data;

@@ -8,6 +8,8 @@ import com.example.itingshuo.SpeakListActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 public class ClassListAdapter extends ArrayAdapter<ClassList> {
     private int resource;
+    private String courseid;
 	public ClassListAdapter(Context context, int resource, List<ClassList> objects) {
 		super(context, resource, objects);
 		// TODO Auto-generated constructor stub
@@ -44,14 +47,14 @@ public class ClassListAdapter extends ArrayAdapter<ClassList> {
 //		fruitName.setText(fruit.getName());
 //		return view;
 		
-		ClassList classList = getItem(position);//获得实例
+		final ClassList classList = getItem(position);//获得实例
 		View view;
 		ViewHolder viewHolder;
 		if(convertView==null){
 		 view = LayoutInflater.from(getContext()).inflate(resource, null);
 		 viewHolder = new ViewHolder();
 		 viewHolder.classTitle =(TextView) view.findViewById(R.id.tv_speak_title);
-		 viewHolder.classContent =(TextView) view.findViewById(R.id.tv_speak_title);
+		 viewHolder.classContent =(TextView) view.findViewById(R.id.tv_speak_content);
 		 viewHolder.classCount = (TextView) view.findViewById(R.id.tv_speak_count);
 		 viewHolder.speakBeginStudy = (ImageView) view.findViewById(R.id.img_speak_beginStudy);
 		 view.setTag(viewHolder);
@@ -69,7 +72,7 @@ public class ClassListAdapter extends ArrayAdapter<ClassList> {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//Toast.makeText(getContext(), movie.getTitle()+"begin study", Toast.LENGTH_SHORT).show();
-				mySendIntent();
+				mySendIntent(classList.getCourseid());
 			}
 		});
 		return view;
@@ -81,14 +84,14 @@ class ViewHolder{
 	TextView classCount;
 	ImageView speakBeginStudy;
 }
-public void mySendIntent(){
+public void mySendIntent(String courseid){
 	Intent intent = new Intent(getContext(), SpeakListActivity.class);
 //    //new一个Bundle对象，并将要传递的数据传入
-//    Bundle bundle = new Bundle();
-//    bundle.putInt("username", username);
-//    bundle.putString("password", password);
-//    //将bundle对象assign给Intent
-//    intent.putExtras(bundle);
+  Bundle bundle = new Bundle();
+    bundle.putString("courseid", courseid);
+    Log.d("sendbundle","courseid: "+courseid);
+    //将bundle对象assign给Intent
+    intent.putExtras(bundle);
 //    //开启跳转
     getContext().startActivity(intent);
 }

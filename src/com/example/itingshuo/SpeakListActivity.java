@@ -1,98 +1,122 @@
 package com.example.itingshuo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import volley.VolleyManager;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.anim.ListAnim;
+import com.config.Urls;
+import com.entity.JCourse;
+import com.entity.JSentenceList;
 import com.speak.ClassList;
 import com.speak.ClassListAdapter;
 import com.speak.JuziList;
 import com.speak.JuziListAdapter;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ListView;
 
-public class SpeakListActivity extends ActionBarActivity {
+public class SpeakListActivity extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener{
 	  private JuziListAdapter adapter = null;  
       private List<JuziList> juziList;
       private ListView juziListView;
+      private String courseid;
+      private SwipeRefreshLayout mSwiperefreshlayout;
+      public static final String TAG = "SpeakClassFragment";
+   	  private String username;
+   	  private String password;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.speak_juzi_fragment);  
+		getmIntent();
 		juziListView = (ListView) findViewById(R.id.lv_speak_juzi);
-		 //填充各控件的数据
-	    Classinit(); 
+		 mSwiperefreshlayout = (SwipeRefreshLayout)findViewById(R.id.swiperefreshlayout);
+		 mSwiperefreshlayout.setColorSchemeResources(
+	                R.color.colorPrimary,
+	                R.color.colorPrimaryDark,
+	                R.color.colorAccent,
+	                R.color.colorAccent//多一个？
+	        );
+        juziList = new ArrayList<JuziList>();
+        mSwiperefreshlayout.setOnRefreshListener(this);	 
+        requestDataFromServer();
         adapter = new JuziListAdapter(SpeakListActivity.this, R.layout.speak_juzi_item, juziList);
         juziListView.setLayoutAnimation(new ListAnim().getListAnim());
         juziListView.setAdapter(adapter);
 	}
+  /*
+	 * 向服务器请求数据
+	 */
+	private void requestDataFromServer(){
+		juziList.clear();
+		 new Handler().post(new Runnable() {
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.speak_list, menu);
-		return true;
+	            @Override
+	            public void run() {
+	                mSwiperefreshlayout.setRefreshing(true);
+	            }
+	        });
+					Map<String,String> map = new HashMap<String,String>();
+			        map.put("courseid", courseid);
+			        
+			       VolleyManager.newInstance().GsonPostRequest(TAG, map, Urls.SENTENCELIST_URL, JSentenceList.class, new Response.Listener<JSentenceList>() {
+			           @Override
+			           public void onResponse(JSentenceList sentenceList) {
+			          //    Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getMovie_name());
+			        	//   Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getCover_addr());   
+			        	   int length = 0;
+			        	   if(sentenceList.getData().getStatus()!=0 && sentenceList.getData().getSentence()!=null){
+			        	   length = sentenceList.getData().getSentence().size();
+			        	   for(int i=0;i<length;i++){ 
+			        		   JuziList sentence  = new JuziList();
+			        		   sentence.setTitle("服务器没有");
+			        		   sentence.setContent(sentenceList.getData().getSentence().get(i).getContent());
+			        		   sentence.setTime("0:30");
+			        		   sentence.setCourseid(sentenceList.getData().getSentence().get(i).getCourse_id());
+			        		   sentence.setSentenceSrc(sentenceList.getData().getSentence().get(i).getSen_addr());
+			        		   sentence.setSentenceid(sentenceList.getData().getSentence().get(i).getSentence_id());
+			        		   juziList.add(sentence);
+			        	   }
+			        	   
+			        	   adapter.notifyDataSetChanged();
+			                if (mSwiperefreshlayout != null)
+			                    mSwiperefreshlayout.setRefreshing(false);
+			        	   Log.d("success", "ok" +  sentenceList.getData().getSentence().get(0).getContent());
+			        	   }
+			           }
+			       }, new Response.ErrorListener() {
+			           @Override
+			           public void onErrorResponse(VolleyError error) {
+			               Log.d("fail", "connect fail");
+			               mSwiperefreshlayout.setRefreshing(false);
+
+			           }
+			       });
+			        Log.d(TAG, "finish");
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	   /*
-     * 语调class数据的读入
-     * 需要服务器接口
-     */
-
-  public void Classinit(){
-  	juziList = new ArrayList<JuziList>();
-  	JuziList class1 = new JuziList();
-  	class1.setTitle("句子1");
-  	class1.setContent("句子1内容");
-  	class1.setTime("10.12");
-  	juziList.add(class1);
-  	JuziList class2 = new JuziList();
-  	class2.setTitle("句子1");
-  	class2.setContent("句子2内容");
-	class2.setTime("10.12");
-	juziList.add(class2);
-  	JuziList class3 = new JuziList();
-  	class3.setTitle("句子1");
-  	class3.setContent("句子3内容");
-	class3.setTime("10.12");
-	juziList.add(class3);
-  	JuziList class4 = new JuziList();
-  	class4.setTitle("句子1");
-  	class4.setContent("句子4内容");
-	class4.setTime("10.12");
-	juziList.add(class4);
-  	JuziList class5 = new JuziList();
-  	class5.setTitle("句子1");
-  	class5.setContent("句子5内容");
-	class5.setTime("10.12");
-	juziList.add(class5);
-	JuziList class6 = new JuziList();
-  	class6.setTitle("句子1");
-  	class6.setContent("句子6内容");
-	class6.setTime("10.12");
-	JuziList class7 = new JuziList();
-  	class7.setTitle("句子1");
-  	class7.setContent("句子7内容");
-	class7.setTime("10.12");
-	juziList.add(class7);
-  }
+	//get intent
+    public void getmIntent(){
+    	Bundle bundle1 = getIntent().getExtras();
+    	courseid = bundle1.getString("courseid");
+		Log.d("bundle","courseid: "+courseid); 	
+    }
+  @Override
+  public void onRefresh() {
+  	requestDataFromServer();
+  }  
   
- 
 }

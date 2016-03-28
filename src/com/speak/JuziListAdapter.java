@@ -5,9 +5,12 @@ import java.util.List;
 import com.example.itingshuo.MovieActivity;
 import com.example.itingshuo.R;
 import com.example.itingshuo.SpeakActivity;
+import com.example.itingshuo.SpeakListActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +47,14 @@ public class JuziListAdapter extends ArrayAdapter<JuziList> {
 //		fruitName.setText(fruit.getName());
 //		return view;
 		
-		JuziList JuziList = getItem(position);//获得实例
+		final JuziList JuziList = getItem(position);//获得实例
 		View view;
 		ViewHolder viewHolder;
 		if(convertView==null){
 		 view = LayoutInflater.from(getContext()).inflate(resource, null);
 		 viewHolder = new ViewHolder();
 		 viewHolder.juziTitle =(TextView) view.findViewById(R.id.tv_speak_title);
-		 viewHolder.juziContent =(TextView) view.findViewById(R.id.tv_speak_title);
+		 viewHolder.juziContent =(TextView) view.findViewById(R.id.tv_speak_content);
 		 viewHolder.juziTime = (TextView) view.findViewById(R.id.tv_speak_time);
 		 viewHolder.movieBeginStudy = (ImageView) view.findViewById(R.id.img_speak_beginStudy);
 		 view.setTag(viewHolder);
@@ -69,7 +72,7 @@ public class JuziListAdapter extends ArrayAdapter<JuziList> {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//Toast.makeText(getContext(), movie.getTitle()+"begin study", Toast.LENGTH_SHORT).show();
-				mySendIntent();
+				mySendIntent(JuziList.getCourseid(),JuziList.getSentenceid());
 			}
 		});
 		return view;
@@ -81,14 +84,16 @@ class ViewHolder{
 	TextView juziTime;
 	ImageView movieBeginStudy;
 }
-public void mySendIntent(){
+public void mySendIntent(String courseid,String sentenceid){
 	Intent intent = new Intent(getContext(), SpeakActivity.class);
 //    //new一个Bundle对象，并将要传递的数据传入
-//    Bundle bundle = new Bundle();
-//    bundle.putInt("username", username);
-//    bundle.putString("password", password);
-//    //将bundle对象assign给Intent
-//    intent.putExtras(bundle);
+  Bundle bundle = new Bundle();
+    bundle.putString("courseid", courseid);
+    bundle.putString("sentenceid", sentenceid);  
+    Log.d("sendbundle","courseid: "+courseid);
+    Log.d("sendbundle","sentenceid: "+sentenceid);
+    //将bundle对象assign给Intent
+    intent.putExtras(bundle);
 //    //开启跳转
     getContext().startActivity(intent);
 }

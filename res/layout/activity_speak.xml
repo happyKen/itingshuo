@@ -67,7 +67,8 @@
             android:layout_marginTop="50dp"
             android:text="飞鸟集"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/content"
@@ -79,7 +80,7 @@
             android:gravity="center"
             android:lineSpacingExtra="3dp"
             android:lineSpacingMultiplier="1.5"
-            android:text="Stray birds of summer come to my window to sing and fly away.\nAnd yellow leaves of autumn,\nwhich have no songs,flutter and fall \nthere with a sign.\n夏天的飞鸟，飞到我的窗前唱歌，又飞去了.\n秋天的黄叶，它们没有什么可唱，\n只叹息一声，飞落在那里。 "
+            android:text=""
             android:textSize="14sp" />
     </RelativeLayout>
 

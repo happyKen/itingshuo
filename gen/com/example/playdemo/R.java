@@ -49,12 +49,12 @@ public final class R {
 		public static final int pause = 0x7f0200a0;
 		public static final int progress_btn_normal = 0x7f0200a2;
 		public static final int progress_btn_press = 0x7f0200a3;
-		public static final int thumb_bar = 0x7f0200b9;
-		public static final int video_brightness_bg = 0x7f0200c1;
-		public static final int video_num_bg = 0x7f0200c2;
-		public static final int video_num_front = 0x7f0200c3;
-		public static final int video_play = 0x7f0200c4;
-		public static final int video_volumn_bg = 0x7f0200c5;
+		public static final int thumb_bar = 0x7f0200ba;
+		public static final int video_brightness_bg = 0x7f0200c2;
+		public static final int video_num_bg = 0x7f0200c3;
+		public static final int video_num_front = 0x7f0200c4;
+		public static final int video_play = 0x7f0200c5;
+		public static final int video_volumn_bg = 0x7f0200c6;
 	}
 	public static final class id {
 		public static final int TextView01 = 0x7f090086;

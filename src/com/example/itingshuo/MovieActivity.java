@@ -180,16 +180,11 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		uiHandler = new UIHandler();   
 		changeState(0);	// 初始化动画
 		fragmentInit();
-		new Thread(){
-			public void run() {
 				movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();    
 				mGetIntent();
 				requestDataFromServer();
-				while(sign);
 				new PlayAsyncTask().execute("");
-			};
-		
-		}.start();
+
 	}
 
 	private RelativeLayout mRl_PlayView;

@@ -34,7 +34,7 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 			e.printStackTrace();
 		}
 		// 每一秒触发一次
-		mTimer.schedule(timerTask, 0, 1000);
+		mTimer.schedule(timerTask, 0, 50);
 	}
 
 	// 计时器
