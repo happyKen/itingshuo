@@ -20,6 +20,7 @@ import com.example.itingshuo.MovieActivity;
 import com.example.itingshuo.R;
 import com.example.itingshuo.ResultActivity;
 import com.example.itingshuo.ToneActivity;
+import com.tool.MySharedpreferrence;
 
 public class ToneListAdapter extends ArrayAdapter<ToneList> {
     private int resource;
@@ -95,6 +96,9 @@ public class ToneListAdapter extends ArrayAdapter<ToneList> {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						//Toast.makeText(getContext(), classList.getTitle()+"LookResult", Toast.LENGTH_SHORT).show();
+						MySharedpreferrence sp = new MySharedpreferrence(getContext());
+						String username = sp.getPerson();
+						Log.d("username", "username:"+username);
 						Intent intent = new Intent(getContext(), ResultActivity.class);
 						 getContext().startActivity(intent);
 					}
