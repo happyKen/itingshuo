@@ -4,12 +4,21 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical" >
-
+<ScrollView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+     android:scrollbars="none"
+     android:layout_margin="10dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/taici"
         android:text="台词"
-        android:textSize="25dp" />
-
+        android:textSize="16sp" 
+        android:gravity="left"
+        android:paddingLeft="8dp"
+        android:lineSpacingExtra="3dp"
+        android:lineSpacingMultiplier="1.5" 
+        android:textColor="#000000"/>
+</ScrollView>
 </LinearLayout>

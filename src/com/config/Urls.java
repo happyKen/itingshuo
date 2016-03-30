@@ -9,6 +9,8 @@ public class Urls {
 	public static final String COURSE_URL = ROOT+"index.php/Home/app/courseApp";
 	public static final String SENTENCELIST_URL = ROOT+"index.php/Home/app/sentenceListApp";
 	public static final String SHOWSENTENCE = ROOT+"index.php/Home/app/senSelectApp";
+	public static final String TONELIST = ROOT+"index.php/Home/app/textListApp";
+	public static final String SHOWTONE = ROOT+"index.php/Home/app/textApp";
 	
 	
 }

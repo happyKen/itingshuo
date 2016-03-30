@@ -2,6 +2,9 @@ package com.entity;
 
 import java.util.List;
 
+import com.config.Urls;
+import com.tool.StringTool;
+
 /**
  * User: zekeng(2815506514@qq.com)
  * Date: 2016-03-25
@@ -76,7 +79,7 @@ public class JShowMovie {
             }
 
             public void setContent(String content) {
-                this.content = content;
+            	this.content=content;
             }
 
             public void setSegment_addr(String segment_addr) {

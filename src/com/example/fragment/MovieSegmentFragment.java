@@ -52,7 +52,7 @@ public class MovieSegmentFragment extends Fragment {
 	    @Override  
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,  
 	            Bundle savedInstanceState) {      	
-	        View v = inflater.inflate(R.layout.movie_list_fragment,null);  
+	        View v = inflater.inflate(R.layout.movie_segment_list_fragment,null);  
 	        movieListView = (ListView) v.findViewById(R.id.lv_movie); 
 	        movieEntity = ((MovieActivity)getActivity()).getmovieEntity();
 	        adapter = new MovieSegmentAdapter(getActivity(), R.layout.movie_item, movieEntity);  

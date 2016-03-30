@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import volley.VolleyManager;
 
@@ -43,6 +44,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -126,7 +128,7 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 	//获取到的intent字段
      private String emotionid;
      private String movieid;
-     private Boolean sign=true;
+     PlayAsyncTask playAsyncTask;
      //两个fragment需要获取的信息
      String taici ="台词";
      private List<JShowMovie.DataEntity.MovieEntity> movieEntity;
@@ -179,12 +181,11 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		setRecorderListener();//监听回听录音上传
 		uiHandler = new UIHandler();   
 		changeState(0);	// 初始化动画
-		fragmentInit();
-				movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();    
+						movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();    
 				mGetIntent();
 				requestDataFromServer();
-				new PlayAsyncTask().execute("");
 
+	
 	}
 
 	private RelativeLayout mRl_PlayView;
@@ -916,12 +917,15 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 				        		  if(taici.equals("台词"))
 				        			  setTaici(jmovie.getData().getMovie().get(0).getContent());
 				        			  if(mPath.equals("http://ocs.maiziedu.com/android_app_sde_1.mp4"))
-				        				  mPath = jmovie.getData().getMovie().get(0).getSegment_addr();
+				        				  mPath = Urls.ROOT+jmovie.getData().getMovie().get(0).getSegment_addr();
 
 				        		  setmovieEntity(jmovie.getData().getMovie());
-				        		  sign=false;
-				        	   Log.d("success", "ok" +  jmovie.getData().getMovie().get(0).getSegment_name());
+				        	   Log.d("success", "ok" +  Urls.ROOT+jmovie.getData().getMovie().get(0).getSegment_addr());
 				        	   }
+				        	    playAsyncTask=new PlayAsyncTask();
+				        	    playAsyncTask.execute("");
+								fragmentInit();
+
 				           }
 				       }, new Response.ErrorListener() {
 				           @Override
@@ -946,8 +950,23 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		public List<JShowMovie.DataEntity.MovieEntity> getmovieEntity(){
 			return movieEntity;
 		}
-
-		
+//更新activity
+		public void refresh(String movieid,String emotionid,String movieSrc,String taici){
+			finish();
+			Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
+//		    //new一个Bundle对象，并将要传递的数据传入
+		  Bundle bundle = new Bundle();
+		    bundle.putString("movieid", movieid);
+		    bundle.putString("emotionid", emotionid);
+		    bundle.putString("movieSrc", movieSrc);
+		    bundle.putString("taici", taici);
+		   
+		    //将bundle对象assign给Intent
+		    intent.putExtras(bundle);
+//		    //开启跳转
+		    Log.d("sendbundle", movieid+emotionid+movieSrc+taici);
+		    startActivity(intent);
+		}
 		
 	    
 	    

@@ -59,15 +59,15 @@ public final class R {
 	public static final class id {
 		public static final int TextView01 = 0x7f090086;
 		public static final int TextView02 = 0x7f090087;
-		public static final int action_settings = 0x7f0900bf;
+		public static final int action_settings = 0x7f0900c3;
 		public static final int ib_back = 0x7f090079;
 		public static final int ib_collect = 0x7f09007c;
 		public static final int ib_dowmload = 0x7f09007d;
 		public static final int ib_pause = 0x7f090084;
-		public static final int layout_top = 0x7f0900bc;
+		public static final int layout_top = 0x7f0900c0;
 		public static final int ll_function = 0x7f09007b;
-		public static final int mediacontroller_back = 0x7f0900bd;
-		public static final int mediacontroller_file_name = 0x7f0900be;
+		public static final int mediacontroller_back = 0x7f0900c1;
+		public static final int mediacontroller_file_name = 0x7f0900c2;
 		public static final int mediacontroller_fill = 0x7f09007f;
 		public static final int mediacontroller_name = 0x7f09007a;
 		public static final int mediacontroller_play_pause = 0x7f09007e;
@@ -89,7 +89,7 @@ public final class R {
 		public static final int mediacontroller = 0x7f030024;
 		public static final int mediacontroller_top = 0x7f030025;
 		public static final int mediaplayer = 0x7f030026;
-		public static final int videoview = 0x7f03003a;
+		public static final int videoview = 0x7f03003d;
 	}
 	public static final class menu {
 		public static final int main = 0x7f0d0002;

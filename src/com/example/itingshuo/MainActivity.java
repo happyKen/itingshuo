@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.fragment.MovieEmotionFragment;
 import com.example.fragment.SpeakClassFragment;
 import com.example.fragment.ToneListFragment;
+import com.example.fragment.ToneTypeFragment;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
 public class MainActivity extends FragmentActivity {
@@ -46,7 +47,8 @@ public class MainActivity extends FragmentActivity {
 	private MovieEmotionFragment movieEmotionFragment;
 	//private MovieListFragment movieListFragment;
 	private SpeakClassFragment speakClassFragment;
-	private ToneListFragment toneListFragment;
+//	private ToneListFragment toneListFragment;
+	private ToneTypeFragment toneTypeFragment;
 	
 
 	@Override
@@ -67,12 +69,13 @@ public class MainActivity extends FragmentActivity {
 //		ViewPropertyAnimator.animate(tab_movie).scaleY(1.2f).setDuration(0);
        movieEmotionFragment = new MovieEmotionFragment();
        speakClassFragment = new SpeakClassFragment();
-       toneListFragment = new ToneListFragment();
+     //  toneListFragment = new ToneListFragment();
+       toneTypeFragment = new ToneTypeFragment();
 		fragments = new ArrayList<Fragment>();
 		fragments.add(movieEmotionFragment);//电影情感选择，不是列表
 		
 		fragments.add(speakClassFragment);//语调选择
-		fragments.add(toneListFragment);//文章选择
+		fragments.add(toneTypeFragment);//文章类型选择
 		//fragments.add(new MovieListFragment());
 		//movieEmotionIntent();
 		line_width = getWindowManager().getDefaultDisplay().getWidth()

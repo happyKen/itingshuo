@@ -2,9 +2,12 @@ package com.tone;
 
 import java.util.List;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +67,7 @@ public class ToneListAdapter extends ArrayAdapter<ToneList> {
 			view = convertView;
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		
+
 		final ToneList classList = getItem(position);//获得实例,final才能被onclick等内部类引用，position需要被引用也需要加final
 		if(classList!=null){
 		viewHolder.toneTitle.setText(classList.getTitle());
@@ -82,7 +85,7 @@ public class ToneListAdapter extends ArrayAdapter<ToneList> {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mySendIntent();
+				mySendIntent(classList.getToneid(),classList.getTypeid());
 			}
 		});
 		//查看成绩监听器
@@ -108,15 +111,17 @@ class ViewHolder{
 	ImageView toneBeginStudy;
 	ImageView toneLookResult;
 }
-public void mySendIntent(){
+public void mySendIntent(String typeid,String toneid){
 	Intent intent = new Intent(getContext(), ToneActivity.class);
-//    //new一个Bundle对象，并将要传递的数据传入
-//    Bundle bundle = new Bundle();
-//    bundle.putInt("username", username);
-//    bundle.putString("password", password);
-//    //将bundle对象assign给Intent
-//    intent.putExtras(bundle);
-//    //开启跳转
+    //new一个Bundle对象，并将要传递的数据传入
+    Bundle bundle = new Bundle();
+   bundle.putString("typeid", typeid);
+   bundle.putString("toneid", toneid);
+   Log.d("send", ""+typeid);
+   Log.d("send", ""+toneid);
+    //将bundle对象assign给Intent
+    intent.putExtras(bundle);
+    //开启跳转
     getContext().startActivity(intent);
 }
 }

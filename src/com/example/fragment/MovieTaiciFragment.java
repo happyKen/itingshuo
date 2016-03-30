@@ -19,7 +19,9 @@ public class MovieTaiciFragment extends Fragment {
 		
 		View view =View.inflate(getActivity(), R.layout.movie_taici_fragment, null);
 		taiciTextView=(TextView) view.findViewById(R.id.taici);
-		taiciTextView.setText(((MovieActivity)getActivity()).getTaici());
+		String taiciString =((MovieActivity)getActivity()).getTaici();
+		String taiciString2=taiciString.replaceAll("##", "\n");
+		taiciTextView.setText(taiciString2);
 		return view;
 	}
 }

@@ -7,6 +7,7 @@ import volley.VolleyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.config.Urls;
 import com.entity.JShowMovie;
 import com.entity.JShowMovie.DataEntity.MovieEntity;
 import com.example.itingshuo.MovieActivity;
 import com.example.itingshuo.MovieListActivity;
 import com.example.itingshuo.R;
+import com.tool.StringTool;
 
 public class MovieSegmentAdapter extends ArrayAdapter<JShowMovie.DataEntity.MovieEntity> {
     private int resource;
@@ -66,10 +69,13 @@ public class MovieSegmentAdapter extends ArrayAdapter<JShowMovie.DataEntity.Movi
 			view = convertView;
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		 VolleyManager.newInstance().ImageLoaderRequest(viewHolder.movieImage, movie.getSegment_cover(),
+		 VolleyManager.newInstance().ImageLoaderRequest(viewHolder.movieImage, Urls.ROOT+movie.getSegment_cover(),
 	                R.drawable.ic_default, R.drawable.ic_error, 80, 80);
 		viewHolder.movieTitle.setText(movie.getSegment_name());
-		viewHolder.movieContent.setText(movie.getContent());
+		String substr ="";
+		if(movie.getContent().length()>20)
+		substr =StringTool.getSubString(movie.getContent(), 24)+"...";
+		viewHolder.movieContent.setText(substr);
 		viewHolder.movieTime.setText(movie.getSegment_time());
 	
 		//进入学习监听器
@@ -79,7 +85,8 @@ public class MovieSegmentAdapter extends ArrayAdapter<JShowMovie.DataEntity.Movi
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						//Toast.makeText(getContext(), movie.getTitle()+"begin study", Toast.LENGTH_SHORT).show();
-						mySendIntent(movie.getMovie_id(),movie.getEmotion_id(),movie.getSegment_addr(),movie.getContent());
+						//mySendIntent(movie.getMovie_id(),movie.getEmotion_id(),movie.getSegment_addr(),movie.getContent());
+						((MovieActivity)getContext()).refresh(movie.getMovie_id(),movie.getEmotion_id(),Urls.ROOT+movie.getSegment_addr(),movie.getContent());
 					}
 				});
 		return view;
@@ -100,9 +107,11 @@ public void mySendIntent(String movieid,String emotionid,String movieSrc,String 
     bundle.putString("emotionid", emotionid);
     bundle.putString("movieSrc", movieSrc);
     bundle.putString("taici", taici);
+   
     //将bundle对象assign给Intent
     intent.putExtras(bundle);
 //    //开启跳转
+    Log.d("sendbundle", movieid+emotionid+movieSrc+taici);
     getContext().startActivity(intent);
 }
 }

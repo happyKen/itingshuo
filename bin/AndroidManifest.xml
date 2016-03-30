@@ -47,6 +47,10 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_movie" >
         </activity>
+         <activity
+            android:name=".ToneListActivity"
+            android:label="@string/title_activity_movie" >
+        </activity>
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
