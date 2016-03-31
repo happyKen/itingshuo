@@ -1,9 +1,11 @@
 package com.example.itingshuo;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import volley.MultipartRequest;
 import volley.VolleyManager;
 
 import com.android.volley.Response;
@@ -12,6 +14,8 @@ import com.config.Urls;
 import com.dialog.ChangeDialog;
 import com.dialog.ResultDialog;
 import com.dialog.UpdateDialog;
+import com.entity.JCourse;
+import com.entity.JLogin;
 import com.entity.JShowMovie;
 import com.entity.JShowTone;
 import com.example.itingshuo.MovieActivity.HuiTingListener;
@@ -276,7 +280,26 @@ public class ToneActivity extends ActionBarActivity {
 	    	    	resultDialog.show();
 	    	    }    
 	    	 }, 3000);
-	    	
+	    	String url ="192.168.203.202/uploadtest/upload.php";
+	    	File file= new File(AudioFileFunc.getWavFilePath());
+	    	Map<String,String> params = new HashMap<String,String>();
+	    	params.put("typeid", typeid);
+	        params.put("toneid", toneid);	
+	    	MultipartRequest<JLogin> multipartRequest = new MultipartRequest<>(url, "file", file, params, 
+	    			new Response.Listener<JLogin>() {
+		           @Override
+		           public void onResponse(JLogin jtone) {
+		        	   Log.d("111111111111111111111", "ok"+jtone.getData());
+	
+
+		           }
+		       }, new Response.ErrorListener() {
+		           @Override
+		           public void onErrorResponse(VolleyError error) {
+		               Log.d("fail", "connect fail");
+
+		           }
+		       });
 	    }
 //
 	    //获取intent传来的值

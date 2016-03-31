@@ -11,6 +11,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.File;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
@@ -181,4 +182,5 @@ public class VolleyManager {
     public void cancel(Object tag) {
         mRequestQueue.cancelAll(tag);
     }
+
 }
