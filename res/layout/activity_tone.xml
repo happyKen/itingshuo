@@ -30,11 +30,11 @@
         android:layout_centerHorizontal="true"/>
     </ScrollView>
 </RelativeLayout>
- <include 
-    android:id="@+id/include3"
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:layout_alignParentBottom="true"
-    layout="@layout/recorder_button"
-       />
+<fragment
+        android:id="@+id/include3"
+        android:name="com.example.fragment.RecorderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

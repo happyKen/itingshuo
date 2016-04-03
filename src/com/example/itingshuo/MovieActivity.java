@@ -108,35 +108,26 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 	private ImageView mIv_Progress_bg;
 	private boolean isFast_Forword;
 	private boolean isUp_downScroll;
-//台词和选句切换
+	// 台词和选句切换
 	private ArrayList<Fragment> fragments;
 	private ViewPager viewPager;
 	private LinearLayout tab_taiCi_bg;
 	private LinearLayout tab_xuanJu_bg;
 	private TextView tab_taiCi_text;
 	private TextView tab_xuanJu_text;
-	//回听录音上传各个按钮
-	private int mState = -1;    //-1:没再录制，0：录制wav
-	private final static int FLAG_WAV = 0;
-	private LinearLayout huiTing_bg;
-	private LinearLayout luYin_bg;
-	private LinearLayout shangChuan_bg;
-	private TextView huiTing_text;
-	private TextView luYin_text;
-	private TextView shangChuan_text;
-	 private UIHandler uiHandler;
-	//获取到的intent字段
-     private String emotionid;
-     private String movieid;
-     PlayAsyncTask playAsyncTask;
-     //两个fragment需要获取的信息
-     String taici ="台词";
-     private List<JShowMovie.DataEntity.MovieEntity> movieEntity;
-     public static final String TAG = "MovieActivity";
+	// 获取到的intent字段
+	private String emotionid;
+	private String movieid;
+	PlayAsyncTask playAsyncTask;
+	// 两个fragment需要获取的信息
+	String taici = "台词";
+	private List<JShowMovie.DataEntity.MovieEntity> movieEntity;
+	public static final String TAG = "MovieActivity";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		new AsyncTask<Object, Object, Object>() {
 			@Override
 			protected Object doInBackground(Object... params) {
@@ -176,36 +167,25 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 			}
 		}.execute();
 		setContentView(R.layout.activity_movie);
-		initTaiCi();//台词切换控件初始化
-		initRecorder();//回听录音上传控件初始化
-		setRecorderListener();//监听回听录音上传
-		uiHandler = new UIHandler();   
-		changeState(0);	// 初始化动画
-						movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();    
-				mGetIntent();
-				requestDataFromServer();
+		initTaiCi();// 台词切换控件初始化
+		changeState(0); // 初始化动画
+		movieEntity = new ArrayList<JShowMovie.DataEntity.MovieEntity>();
+		mGetIntent();
+		requestDataFromServer();
 
-	
 	}
 
 	private RelativeLayout mRl_PlayView;
-	//台词切换控件初始化
-	private void initTaiCi(){
-		tab_taiCi_bg =  (LinearLayout) findViewById(R.id.taici_bg);
-		tab_taiCi_text = (TextView) findViewById(R.id.taici_text);	
-		tab_xuanJu_bg =  (LinearLayout) findViewById(R.id.xuanju_bg);
+
+	// 台词切换控件初始化
+	private void initTaiCi() {
+		tab_taiCi_bg = (LinearLayout) findViewById(R.id.taici_bg);
+		tab_taiCi_text = (TextView) findViewById(R.id.taici_text);
+		tab_xuanJu_bg = (LinearLayout) findViewById(R.id.xuanju_bg);
 		tab_xuanJu_text = (TextView) findViewById(R.id.xuanju_text);
 	}
-	//回听录音上传控件初始化
-	private void initRecorder(){
-		huiTing_bg =  (LinearLayout) findViewById(R.id.huiti_bg);
-		huiTing_text = (TextView) findViewById(R.id.huiti_text);	
-		luYin_bg =  (LinearLayout) findViewById(R.id.luyin_bg);
-		luYin_text = (TextView) findViewById(R.id.luyin_text);
-		shangChuan_bg =  (LinearLayout) findViewById(R.id.shangchuan_bg);
-		shangChuan_text = (TextView) findViewById(R.id.shangchuan_text);
-	}
-	//视频控件初始化
+
+	// 视频控件初始化
 	private void initVideoView() {
 		mVideoView = (VideoView) findViewById(R.id.surface_view);
 		mLoadingView = findViewById(R.id.video_loading);
@@ -230,52 +210,7 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		mVideoView.setOnSeekCompleteListener(this);
 
 	}
-	private void setRecorderListener(){
-		huiTing_bg.setOnClickListener(new HuiTingListener());
-		luYin_bg.setOnClickListener(new LuYinListener());
-		shangChuan_bg.setOnClickListener(new ShangChuanListener());
-	}
-	//回听监听器
-	class HuiTingListener implements OnClickListener{
 
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			//播放录音
-			//Toast.makeText(MovieActivity.this,"huiting", Toast.LENGTH_SHORT).show();
-			play();
-		}
-		
-	}
-	//录音监听器
-	class LuYinListener implements OnClickListener{
-
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			//Toast.makeText(MovieActivity.this,"luYin", Toast.LENGTH_SHORT).show();
-			if(MovieActivity.this.luYin_text.getText().equals("录音")){ 
-			record(FLAG_WAV);
-			}else{
-			stop();	
-			}
-			
-			 
-		}
-		
-	}
-	//上传监听器
-	class ShangChuanListener implements OnClickListener{
-
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			//Toast.makeText(MovieActivity.this,"shangChuan", Toast.LENGTH_SHORT).show();
-			
-			getResult();
-		}
-		
-	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 
@@ -630,11 +565,11 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void fragmentInit(){
+
+	public void fragmentInit() {
 		fragments = new ArrayList<Fragment>();
-		fragments.add(new MovieTaiciFragment());//台词
-		fragments.add(new MovieSegmentFragment());//选句	
+		fragments.add(new MovieTaiciFragment());// 台词
+		fragments.add(new MovieSegmentFragment());// 选句
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		viewPager.setOffscreenPageLimit(3);
 		viewPager.setAnimationCacheEnabled(true);
@@ -645,10 +580,12 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 			public int getCount() {
 				return fragments.size();
 			}
-			@Override  
-			public int getItemPosition(Object object) {  
-			    return POSITION_NONE;  
-			}  
+
+			@Override
+			public int getItemPosition(Object object) {
+				return POSITION_NONE;
+			}
+
 			@Override
 			public Fragment getItem(int arg0) {
 				return fragments.get(arg0);
@@ -662,26 +599,24 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 				changeState(arg0);
 			}
 
-
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
 
-
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
 		tab_taiCi_bg.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				viewPager.setCurrentItem(0);
-				
+
 			}
 		});
 
@@ -693,281 +628,187 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 			}
 		});
 	}
+
 	/* 根据传入的值来改变状态 */
 	@SuppressLint("NewApi")
 	private void changeState(int arg0) {
 		if (arg0 == 0) {
-			tab_taiCi_bg.setBackground(getResources().getDrawable(R.drawable.select_blue_bg));
-			tab_xuanJu_bg.setBackground(getResources().getDrawable(R.drawable.select_white_bg));
-			tab_taiCi_text.setTextColor(getResources().getColor(R.color.selected));
-			tab_xuanJu_text.setTextColor(getResources().getColor(R.color.no_selected));
-		} else if(arg0 == 1){
-			tab_xuanJu_bg.setBackground(getResources().getDrawable(R.drawable.select_blue_bg));
-			tab_taiCi_bg.setBackground(getResources().getDrawable(R.drawable.select_white_bg));
-			tab_xuanJu_text.setTextColor(getResources().getColor(R.color.selected));
-			tab_taiCi_text.setTextColor(getResources().getColor(R.color.no_selected));
-			
+			tab_taiCi_bg.setBackground(getResources().getDrawable(
+					R.drawable.select_blue_bg));
+			tab_xuanJu_bg.setBackground(getResources().getDrawable(
+					R.drawable.select_white_bg));
+			tab_taiCi_text.setTextColor(getResources().getColor(
+					R.color.selected));
+			tab_xuanJu_text.setTextColor(getResources().getColor(
+					R.color.no_selected));
+		} else if (arg0 == 1) {
+			tab_xuanJu_bg.setBackground(getResources().getDrawable(
+					R.drawable.select_blue_bg));
+			tab_taiCi_bg.setBackground(getResources().getDrawable(
+					R.drawable.select_white_bg));
+			tab_xuanJu_text.setTextColor(getResources().getColor(
+					R.color.selected));
+			tab_taiCi_text.setTextColor(getResources().getColor(
+					R.color.no_selected));
+
 		}
 	}
-	    private final static int CMD_RECORDING_TIME = 2000;
-	    private final static int CMD_RECORDFAIL = 2001;
-	    private final static int CMD_STOP = 2002;
-	    private final static int CMD_PLAYFAIL = 2003;
-	   class UIHandler extends Handler{
-	        public UIHandler() {
-	        }
-	        @Override
-	        public void handleMessage(Message msg) {
-	            // TODO Auto-generated method stub
-	            Log.d("MyHandler", "handleMessage......");
-	            super.handleMessage(msg);
-	            Bundle b = msg.getData();
-	            int vCmd = b.getInt("cmd");
-	            switch(vCmd)
-	            {
-	            case CMD_RECORDING_TIME:
-	            	MovieActivity.this.luYin_text.setText("完成");
-	                break;
-	            case CMD_RECORDFAIL:
-	            	int vErrorCode = b.getInt("msg");
-	                String vMsg = ErrorCode.getErrorInfo(MovieActivity.this, vErrorCode);
-	            	Toast.makeText(MovieActivity.this,"录音失败", Toast.LENGTH_SHORT).show();
-	            	MovieActivity.this.luYin_text.setText("录音");
-	                break;
-	            case CMD_STOP:                
-	                int vFileType = b.getInt("msg");
-	                switch(vFileType){
-	                case FLAG_WAV:
-	                    AudioRecordFunc mRecord_1 = AudioRecordFunc.getInstance(); 
-	                    MovieActivity.this.luYin_text.setText("录音");
-	                    break;
-	                }
-	                break;
-	            case CMD_PLAYFAIL:
-	            	Toast.makeText(MovieActivity.this,"请先录音！", Toast.LENGTH_SHORT).show();
-	            	break;
-	            default:
-	                break;
-	            }
-	        }
-	    };
 
-	    /**
-	     * 开始录音
-	     * @param mFlag，0：录制wav格式，1：录音amr格式
-	     */
-	    private void record(int mFlag){
-	        if(mState != -1){
-	        	 Log.d("ces", "ggggg");
-	            Message msg = new Message();
-	            Bundle b = new Bundle();// 存放数据
-	            b.putInt("cmd",CMD_RECORDFAIL);
-	            b.putInt("msg", ErrorCode.E_STATE_RECODING);
-	            msg.setData(b); 
-	            
-	            uiHandler.sendMessage(msg); // 向Handler发送消息,更新UI
-	            return;
-	        } 
-	        int mResult = -1;       
-	        AudioRecordFunc mRecord_1 = AudioRecordFunc.getInstance();
-	        mResult = mRecord_1.startRecordAndFile();            
-	        if(mResult == ErrorCode.SUCCESS){
-	       	 Log.d("ces", "ssss");
-	        	 Message msg = new Message();
-	                Bundle b = new Bundle();// 存放数据
-	                b.putInt("cmd",CMD_RECORDING_TIME);
-	                msg.setData(b); 
-	                uiHandler.sendMessage(msg); // 向Handler发送消息,更新UI
-	                mState = mFlag;
-	        }else{
-	       	 Log.d("ces", "hhhhh");
-	            Message msg = new Message();
-	            Bundle b = new Bundle();// 存放数据
-	            b.putInt("cmd",CMD_RECORDFAIL);
-	            b.putInt("msg", mResult);
-	            msg.setData(b); 
-	            uiHandler.sendMessage(msg); // 向Handler发送消息,更新UI
-	        }
-	    }
-	    /**
-	     * 停止录音
-	     */
-	    private void stop(){
-	        if(mState != -1){
-	            AudioRecordFunc mRecord_1 = AudioRecordFunc.getInstance();
-	            mRecord_1.stopRecordAndFile();         
-	            Message msg = new Message();
-	            Bundle b = new Bundle();// 存放数据
-	            b.putInt("cmd",CMD_STOP);
-	            b.putInt("msg", mState);
-	            msg.setData(b);
-	            uiHandler.sendMessage(msg); // 向Handler发送消息,更新UI 
-	            mState = -1;
-	        }
-	    }    
-	    /**
-	     * 播放录音
-	     */
-	    private void play(){
-	        if(mState != -1){
-	           
-	            Message msg = new Message();
-	            Bundle b = new Bundle();// 存放数据
-	            b.putInt("cmd",CMD_PLAYFAIL);
-	            b.putInt("msg", mState);
-	            msg.setData(b);
-	            uiHandler.sendMessage(msg); // 向Handler发送消息,更新UI 
-	            mState = -1;
-	        }else{
-	        	if(AudioFileFunc.getWavFilePath()!=""){
-	        		try {
-	    				PlayAudioTrack.PlayAudioTrack(AudioFileFunc.getWavFilePath());
-	    			} catch (IOException e) {
-	    				// TODO Auto-generated catch block
-	    				e.printStackTrace();
-	    			}
-	    		 
+	// 设置切换片段弹框
+	public void showAlertDialog() {
 
-	        	}else{
-	        		 Log.d("play", "找不到录音文件！！！");
-	        	}
-	        }
-	    }    
-	    //设置切换片段弹框
-	    public void showAlertDialog() {
+		ChangeDialog.Builder builder = new ChangeDialog.Builder(this);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				// 设置你的操作事项
+			}
+		});
 
-			ChangeDialog.Builder builder = new ChangeDialog.Builder(this);
-			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					//设置你的操作事项
-				}
-			});
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
 
-			builder.setNegativeButton("取消",
-					new android.content.DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
+		builder.create().show();
+
+	}
+
+	// 设置上传弹框
+	public void showUpdateDialog() {
+
+		UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
+		builder.create().show();
+
+	}
+
+	// 设置结果弹框
+	public void showResultDialog() {
+
+		ResultDialog.Builder builder = new ResultDialog.Builder(this);
+		builder.create().show();
+
+	}
+
+	// 与服务器连接获得结果
+	public void getResult() {
+		UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
+		final Dialog updateDialog = builder.create();
+		final ResultDialog.Builder builder2 = new ResultDialog.Builder(this);
+		updateDialog.show();
+		new Handler().postDelayed(new Runnable() {
+			public void run() {
+				// execute the task
+				updateDialog.dismiss();
+				Dialog resultDialog = builder2.create();
+				resultDialog.show();
+			}
+		}, 3000);
+
+	}
+
+	// 获取intent传来的值
+	public void mGetIntent() {
+		Bundle bundle1 = getIntent().getExtras();
+		emotionid = bundle1.getString("emotionid");
+		movieid = bundle1.getString("movieid");
+		Log.d("bundle", "emotionid: " + emotionid);
+		Log.d("bundle", "movieid: " + movieid);
+		if (bundle1.containsKey("taici")) {
+			setTaici(bundle1.getString("taici"));
+		}
+		if (bundle1.containsKey("movieSrc")) {
+			mPath = bundle1.getString("movieSrc");
+		}
+
+	}
+
+	/*
+	 * 模拟向服务器请求数据
+	 */
+	private void requestDataFromServer() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("emotionid", emotionid);
+		map.put("movieid", movieid);
+		VolleyManager.newInstance().GsonPostRequest(TAG, map,
+				Urls.SHOWMOVIE_URL, JShowMovie.class,
+				new Response.Listener<JShowMovie>() {
+					@Override
+					public void onResponse(JShowMovie jmovie) {
+						// Log.d("111111111111111111111", "ok" +
+						// jmovie.getData().getMovie().get(0).getMovie_name());
+						// Log.d("111111111111111111111", "ok" +
+						// jmovie.getData().getMovie().get(0).getCover_addr());
+						int length = 0;
+						if (jmovie.getData().getStatus() != 0
+								&& jmovie.getData().getMovie() != null) {
+							if (taici.equals("台词"))
+								setTaici(jmovie.getData().getMovie().get(0)
+										.getContent());
+							if (mPath
+									.equals("http://ocs.maiziedu.com/android_app_sde_1.mp4"))
+								mPath = Urls.ROOT
+										+ jmovie.getData().getMovie().get(0)
+												.getSegment_addr();
+
+							setmovieEntity(jmovie.getData().getMovie());
+							Log.d("success", "ok"
+									+ Urls.ROOT
+									+ jmovie.getData().getMovie().get(0)
+											.getSegment_addr());
 						}
-					});
+						playAsyncTask = new PlayAsyncTask();
+						playAsyncTask.execute("");
+						fragmentInit();
 
-			builder.create().show();
+					}
+				}, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.d("fail", "connect fail");
 
-		}
-	    //设置上传弹框
-	    public void showUpdateDialog() {
+					}
+				});
+		Log.d(TAG, "finish");
+	}
 
-			UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
-			builder.create().show();
+	// fragment获取activity信息
+	public void setTaici(String taici) {
+		this.taici = taici;
+	}
 
-		}
-	  //设置结果弹框
-	    public void showResultDialog() {
+	public void setmovieEntity(
+			List<JShowMovie.DataEntity.MovieEntity> movieEntity) {
+		this.movieEntity = movieEntity;
+	}
 
-			ResultDialog.Builder builder = new ResultDialog.Builder(this);
-			builder.create().show();
+	public String getTaici() {
+		return taici;
+	}
 
-		}
-	    //与服务器连接获得结果
-	    public void getResult(){
-	    	UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
-	    	final Dialog updateDialog = builder.create();
-	    	final ResultDialog.Builder builder2 = new ResultDialog.Builder(this);
-	    	updateDialog.show();
-	    	new Handler().postDelayed(new Runnable(){    
-	    	    public void run() {    
-	    	    //execute the task    
-	    	    	updateDialog.dismiss();	    	    	
-	    	    	Dialog resultDialog = builder2.create();
-	    	    	resultDialog.show();
-	    	    }    
-	    	 }, 3000);
-	    	
-	    }
-	    
-	    //获取intent传来的值
-	    public void mGetIntent(){
-	 	    	Bundle bundle1 = getIntent().getExtras();
-	 	    	emotionid = bundle1.getString("emotionid");
-	 			movieid = bundle1.getString("movieid");
-	 			Log.d("bundle","emotionid: "+emotionid);
-	 			Log.d("bundle","movieid: "+movieid);
-	 	    	if(bundle1.containsKey("taici")){
-	 	    		setTaici(bundle1.getString("taici"));
-	 	    	}
-	 	    	if(bundle1.containsKey("movieSrc")){
-	 	    		mPath = bundle1.getString("movieSrc");
-	 	    	}    		
-	 			
-	    }
-	    /*
-		 * 模拟向服务器请求数据
-		 */
-		private void requestDataFromServer(){
-						Map<String,String> map = new HashMap<String,String>();
-				        map.put("emotionid", emotionid);
-				        map.put("movieid", movieid);		        
-				       VolleyManager.newInstance().GsonPostRequest(TAG, map, Urls.SHOWMOVIE_URL, JShowMovie.class, new Response.Listener<JShowMovie>() {
-				           @Override
-				           public void onResponse(JShowMovie jmovie) {
-				          //    Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getMovie_name());
-				        	//   Log.d("111111111111111111111", "ok" +  jmovie.getData().getMovie().get(0).getCover_addr());   
-				        	   int length = 0;
-				        	   if(jmovie.getData().getStatus()!=0 && jmovie.getData().getMovie()!=null){
-				        		  if(taici.equals("台词"))
-				        			  setTaici(jmovie.getData().getMovie().get(0).getContent());
-				        			  if(mPath.equals("http://ocs.maiziedu.com/android_app_sde_1.mp4"))
-				        				  mPath = Urls.ROOT+jmovie.getData().getMovie().get(0).getSegment_addr();
+	public List<JShowMovie.DataEntity.MovieEntity> getmovieEntity() {
+		return movieEntity;
+	}
 
-				        		  setmovieEntity(jmovie.getData().getMovie());
-				        	   Log.d("success", "ok" +  Urls.ROOT+jmovie.getData().getMovie().get(0).getSegment_addr());
-				        	   }
-				        	    playAsyncTask=new PlayAsyncTask();
-				        	    playAsyncTask.execute("");
-								fragmentInit();
+	// 更新activity
+	public void refresh(String movieid, String emotionid, String movieSrc,
+			String taici) {
+		finish();
+		Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
+		// //new一个Bundle对象，并将要传递的数据传入
+		Bundle bundle = new Bundle();
+		bundle.putString("movieid", movieid);
+		bundle.putString("emotionid", emotionid);
+		bundle.putString("movieSrc", movieSrc);
+		bundle.putString("taici", taici);
 
-				           }
-				       }, new Response.ErrorListener() {
-				           @Override
-				           public void onErrorResponse(VolleyError error) {
-				               Log.d("fail", "connect fail");
+		// 将bundle对象assign给Intent
+		intent.putExtras(bundle);
+		// //开启跳转
+		Log.d("sendbundle", movieid + emotionid + movieSrc + taici);
+		startActivity(intent);
+	}
 
-				           }
-				       });
-				        Log.d(TAG, "finish");
-		}
-		
-		//fragment获取activity信息
-		public void setTaici(String taici){
-			this.taici = taici;
-		}
-		public void setmovieEntity(List<JShowMovie.DataEntity.MovieEntity> movieEntity){
-			this.movieEntity = movieEntity;
-		}
-		public String getTaici(){
-			return taici;
-		}
-		public List<JShowMovie.DataEntity.MovieEntity> getmovieEntity(){
-			return movieEntity;
-		}
-//更新activity
-		public void refresh(String movieid,String emotionid,String movieSrc,String taici){
-			finish();
-			Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
-//		    //new一个Bundle对象，并将要传递的数据传入
-		  Bundle bundle = new Bundle();
-		    bundle.putString("movieid", movieid);
-		    bundle.putString("emotionid", emotionid);
-		    bundle.putString("movieSrc", movieSrc);
-		    bundle.putString("taici", taici);
-		   
-		    //将bundle对象assign给Intent
-		    intent.putExtras(bundle);
-//		    //开启跳转
-		    Log.d("sendbundle", movieid+emotionid+movieSrc+taici);
-		    startActivity(intent);
-		}
-		
-	    
-	    
 }
