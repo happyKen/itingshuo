@@ -676,38 +676,6 @@ public class MovieActivity extends FragmentActivity implements OnClickListener,
 
 	}
 
-	// 设置上传弹框
-	public void showUpdateDialog() {
-
-		UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
-		builder.create().show();
-
-	}
-
-	// 设置结果弹框
-	public void showResultDialog() {
-
-		ResultDialog.Builder builder = new ResultDialog.Builder(this);
-		builder.create().show();
-
-	}
-
-	// 与服务器连接获得结果
-	public void getResult() {
-		UpdateDialog.Builder builder = new UpdateDialog.Builder(this);
-		final Dialog updateDialog = builder.create();
-		final ResultDialog.Builder builder2 = new ResultDialog.Builder(this);
-		updateDialog.show();
-		new Handler().postDelayed(new Runnable() {
-			public void run() {
-				// execute the task
-				updateDialog.dismiss();
-				Dialog resultDialog = builder2.create();
-				resultDialog.show();
-			}
-		}, 3000);
-
-	}
 
 	// 获取intent传来的值
 	public void mGetIntent() {

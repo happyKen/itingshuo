@@ -1,14 +1,22 @@
 package com.example.fragment;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.http.Header;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.config.Urls;
 import com.dialog.ResultDialog;
 import com.dialog.UpdateDialog;
 import com.entity.JLogin;
 import com.example.itingshuo.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.recorder.AudioFileFunc;
 import com.recorder.AudioRecordFunc;
 import com.recorder.ErrorCode;
@@ -18,6 +26,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,10 +122,12 @@ public class RecorderFragment extends Fragment {
 		}
 
 	}
+
 	private final static int CMD_RECORDING_TIME = 2000;
 	private final static int CMD_RECORDFAIL = 2001;
 	private final static int CMD_STOP = 2002;
 	private final static int CMD_PLAYFAIL = 2003;
+
 	class UIHandler extends Handler {
 		public UIHandler() {
 		}
@@ -244,36 +255,60 @@ public class RecorderFragment extends Fragment {
 		}
 	}
 
-	// 设置上传弹框
-	public void showUpdateDialog() {
-
+	// 展示数据
+	public void getResult() {
 		UpdateDialog.Builder builder = new UpdateDialog.Builder(getActivity());
-		builder.create().show();
+		final Dialog updateDialog = builder.create();
+		final ResultDialog.Builder builder2 = new ResultDialog.Builder(
+				getActivity());
+		updateDialog.show();
+		// 获取上传文件的路径
+		String path = AudioFileFunc.getWavFilePath();
+		// 判断上传路径是否为空
+		if (TextUtils.isEmpty(path.trim())) {
+			Toast.makeText(getActivity(), "上次文件路径不能为空", 1).show();
+		} else {
+			// 异步的客户端对象
+			AsyncHttpClient client = new AsyncHttpClient();
+			// 指定url路径
+			String url = Urls.UPLOAD;
+			// 封装文件上传的参数
+			RequestParams params = new RequestParams();
+			// 根据路径创建文件
+			File file = new File(path);
+			try {
+				// 放入文件
+				params.put("file", file);
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.d("file", "文件不存在----------");
+			}
+			client.post(url, params, new TextHttpResponseHandler() {
+
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						String responseString) {
+					// TODO Auto-generated method stub
+					if (statusCode == 200) {
+						Log.d("sucess", responseString);
+						if(!responseString.equals("0")){
+						updateDialog.dismiss();					
+						Dialog resultDialog = builder2.create(responseString.trim());
+						resultDialog.show();
+						}
+					}
+				}
+
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						String responseString, Throwable throwable) {
+					// TODO Auto-generated method stub
+
+					Log.d("fail", responseString);
+				}
+			});
+			Log.d("finish", "333333");
+		}
 
 	}
-
-	// 设置结果弹框
-	public void showResultDialog() {
-
-		ResultDialog.Builder builder = new ResultDialog.Builder(getActivity());
-		builder.create().show();
-
-	}
-
-	// 与服务器连接获得结果
-	  public void getResult(){
-	    	UpdateDialog.Builder builder = new UpdateDialog.Builder(getActivity());
-	    	final Dialog updateDialog = builder.create();
-	    	final ResultDialog.Builder builder2 = new ResultDialog.Builder(getActivity());
-	    	updateDialog.show();
-	    	new Handler().postDelayed(new Runnable(){    
-	    	    public void run() {    
-	    	    //execute the task    
-	    	    	updateDialog.dismiss();	    	    	
-	    	    	Dialog resultDialog = builder2.create();
-	    	    	resultDialog.show();
-	    	    }    
-	    	 }, 3000);
-	    }
-
 }

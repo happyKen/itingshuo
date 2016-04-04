@@ -11,7 +11,6 @@ public class Urls {
 	public static final String SHOWSENTENCE = ROOT+"index.php/Home/app/senSelectApp";
 	public static final String TONELIST = ROOT+"index.php/Home/app/textListApp";
 	public static final String SHOWTONE = ROOT+"index.php/Home/app/textApp";
-	
-	
+	public static final String UPLOAD = "http://192.168.203.202/testjava/upload.php";	
 }
 
