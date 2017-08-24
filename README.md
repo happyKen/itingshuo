@@ -8,9 +8,10 @@
 使用Gson+volley+okHTTP网络通信架构，更好地应付多用户，多线程的访问流量。 
 
 ###下面是部分截图
-<img width="150" height="150" src="./选择篇章.png"/>
-![选择篇章](./选择篇章.png =200x300)  
-![电影播放截图](./image.png =200x300)  
-![反馈结果](./result.png =200x300)  
-![语调](./语音语调练习播放及播放.png =200x300)  
-![演讲与散文](./演讲与散文录音.png =200x300)  
+***
+<img width="300" height="500" src="./选择篇章.png"/>        <img width="300" height="500" src="./image.png"/>
+
+<img width="300" height="500" src="./result.png"/>          <img width="300" height="500" src="./语音语调练习播放及播放.png"/>
+
+<img width="300" height="500" src="./演讲与散文录音.png"/>
+
